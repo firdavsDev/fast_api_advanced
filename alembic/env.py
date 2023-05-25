@@ -21,7 +21,8 @@ fileConfig(config.config_file_name)
 
 from ecommerce import config as config_env
 from ecommerce.db import Base
-from ecommerce.user.models import User
+from ecommerce.user.models import User # noqa
+from ecommerce.products.models import Category, Product # noqa
 
 target_metadata = Base.metadata
 
