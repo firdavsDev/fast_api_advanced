@@ -33,8 +33,3 @@ async def get_user_by_id(user_id: int, db) -> models.User:
 async def delete_user_by_id(user_id, database):
     database.query(models.User).filter(models.User.id == user_id).delete()
     database.commit()
-
-
-async def delete_user_by_id(user_id, database):
-    database.query(models.User).filter(models.User.id == user_id).delete()
-    database.commit()

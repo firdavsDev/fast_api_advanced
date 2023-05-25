@@ -1,4 +1,6 @@
 from __future__ import with_statement
+from ecommerce.db import Base
+from ecommerce import config as config_env
 
 from logging.config import fileConfig
 
@@ -19,10 +21,9 @@ fileConfig(config.config_file_name)
 # target_metadata = mymodel.Base.metadata
 # target_metadata = None
 
-from ecommerce import config as config_env
-from ecommerce.db import Base
-from ecommerce.user.models import User # noqa
-from ecommerce.products.models import Category, Product # noqa
+from ecommerce.user.models import User  # noqa
+from ecommerce.products.models import Category, Product  # noqa
+from ecommerce.cart.models import Cart, CartItems  # noqa
 
 target_metadata = Base.metadata
 
