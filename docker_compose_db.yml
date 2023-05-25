@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data:cached
+      - local_postgres_data_backups:/backups:cached
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: fast_api_pg_admin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: raj@nola.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  local_postgres_data: { }
+  local_postgres_data_backups: { }
+  pgadmin-data: { }
+
+
+
+#docker exec -it fast_api_advanced_db_1 /bin/sh
+#psql -U postgres
+#CREATE DATABASE db_names;
