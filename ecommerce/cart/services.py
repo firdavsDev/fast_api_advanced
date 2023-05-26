@@ -1,5 +1,6 @@
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from sqlalchemy import and_
 
 from ecommerce import db
 from ecommerce.products.models import Product
@@ -33,3 +34,11 @@ async def add_to_cart(product_id: int, database: Session):
         database.refresh(new_cart)
         await add_items(new_cart.id, product_info.id, database)
     return {"message": "Product added to cart successfully"}
+
+
+async def remove_cart_item(cart_item_id: int, database) -> None:
+    cart_id = database.query(Cart).filter(Cart.user_id == 3).first()
+    database.query(CartItems).filter(
+        and_(CartItems.id == cart_item_id, CartItems.cart_id == cart_id.id)).delete()
+    database.commit()
+    return
