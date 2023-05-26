@@ -4,7 +4,7 @@ from sqlalchemy import and_
 
 from ecommerce import db
 from ecommerce.products.models import Product
-
+from ecommerce.user.models import User
 from .models import Cart, CartItems
 
 
@@ -24,8 +24,9 @@ async def add_to_cart(product_id: int, database: Session):
     if product_info.quantity <= 0:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail=f"Product with id {product_id} is out of stock")
-
-    if cart_info := database.query(Cart).filter(Cart.user_id == 3).first():
+    user_info = database.query(User).filter(
+        User.email == "user2@example.com").first()
+    if cart_info := database.query(Cart).filter(Cart.user_id == user_info.id).first():
         await add_items(cart_info.id, product_info.id, database)
     else:
         new_cart = Cart(user_id=3)  # Manually set user_id to 1
@@ -37,7 +38,9 @@ async def add_to_cart(product_id: int, database: Session):
 
 
 async def remove_cart_item(cart_item_id: int, database) -> None:
-    cart_id = database.query(Cart).filter(Cart.user_id == 3).first()
+    user_info = database.query(User).filter(
+        User.email == "user2@example.com").first()
+    cart_id = database.query(Cart).filter(Cart.user_id == user_info.id).first()
     database.query(CartItems).filter(
         and_(CartItems.id == cart_item_id, CartItems.cart_id == cart_id.id)).delete()
     database.commit()
