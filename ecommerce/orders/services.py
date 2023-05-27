@@ -5,6 +5,7 @@ from fastapi import HTTPException, status
 from ecommerce.cart.models import Cart, CartItems
 from ecommerce.orders.models import Order, OrderDetails
 from ecommerce.user.models import User
+from . import mail
 
 
 async def initiate_order(database) -> Order:
@@ -38,7 +39,7 @@ async def initiate_order(database) -> Order:
     database.commit()
 
     # Send Email
-    # TODO in next tutorial
+    mail.order_notification(user_info.email)
 
     # clear items in cart once new order is placed
     database.query(CartItems).filter(CartItems.cart_id == cart.id).delete()

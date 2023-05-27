@@ -15,6 +15,10 @@
     For makemigration db: alembic revision --autogenerate
     For migrate changes to db: alembic upgrade head
 
+##Run tests
+    
+    pytest
+
 ##Run app in localhost
 
     python3 main.py

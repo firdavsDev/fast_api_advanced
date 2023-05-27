@@ -20,13 +20,16 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
 
 volumes:
-  local_postgres_data: { }
-  local_postgres_data_backups: { }
-  pgadmin-data: { }
-
-
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+  pgadmin-data: {}
 
 #docker exec -it fast_api_advanced_db_1 /bin/sh
 #psql -U postgres

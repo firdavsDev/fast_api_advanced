@@ -1,13 +1,16 @@
 import uvicorn
+from celery import Celery
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # IMPORT ROUTERS
-from ecommerce.user import router as user_router
-from ecommerce.products.routers import category as category_router
-from ecommerce.products.routers import product as product_router
 from ecommerce.cart import router as cart_router
 from ecommerce.orders import router as order_router
+from ecommerce.products.routers import category as category_router
+from ecommerce.products.routers import product as product_router
+from ecommerce.user import router as user_router
+from ecommerce.auth import router as auth_router
+from ecommerce import config
 
 app = FastAPI(
     title="FastAPI Advanced Tutorial",
@@ -39,7 +42,18 @@ app.include_router(category_router.router)
 app.include_router(product_router.router)
 app.include_router(cart_router.router)
 app.include_router(order_router.router)
+app.include_router(auth_router.router)
 
+celery = Celery(
+    __name__,
+    broker=f"redis://{config.REDIS_HOST}:{config.REDIS_PORT}/{config.REDIS_DB}",
+    backend=f"redis://{config.REDIS_HOST}:{config.REDIS_PORT}/{config.REDIS_DB}",
+
+)
+
+celery.conf.imports = [
+    "ecommerce.orders.tasks",
+]
 
 if __name__ == "__main__":
     uvicorn.run(
