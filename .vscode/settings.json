@@ -4,6 +4,7 @@
     },
     "python.formatting.provider": "none",
     "yaml.schemas": {
-        "kubernetes://schema/v1@service": "k8smsx://loadkubernetescore/service-kubernetes.yaml?ns%3Ddefault%26value%3Dservice%2Fkubernetes%26_%3D1685197263220"
+        "kubernetes://schema/v1@service": "k8smsx://loadkubernetescore/service-kubernetes.yaml?ns%3Ddefault%26value%3Dservice%2Fkubernetes%26_%3D1685197263220",
+        "kubernetes://schema/v1@namespace": "k8smsx://loadkubernetescore/namespace-fastapi-project.yaml?value%3Dnamespace%2Ffastapi-project%26_%3D1685228438510"
     }
 }

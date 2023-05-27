@@ -1,4 +1,6 @@
 
+from typing import List
+
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -22,7 +24,7 @@ async def create_product(request: schemas.Product, database: Session = Depends(d
     return await services.create_new_product(request, database)
 
 
-@router.get('/', status_code=status.HTTP_200_OK, response_model=list[schemas.ProductListing])
+@router.get('/', status_code=status.HTTP_200_OK, response_model=List[schemas.ProductListing])
 async def get_all_products(database: Session = Depends(db.get_db)):
     return await services.get_all_products(database)
 

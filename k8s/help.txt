@@ -1,0 +1,48 @@
+# namespaces
+First I will create a namespace. In Kubernetes, namespaces provide a mechanism for isolating groups of resources within a single cluster. 
+Names of resources need to be unique within a namespace, but not across namespaces.
+
+Resources such as pods, services, and deployments are created by using the YAML files.
+
+More: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/#not-all-objects-are-in-a-namespace
+
+
+# Deployment
+Let’s move first with the deployment. A deployment is an object in Kubernetes that lets you manage a set of identical pods. 
+Without a deployment, you’d need to create, update, and delete a bunch of pods manually.
+With a deployment, you declare a single object in a YAML file. 
+This object is responsible for creating the pods, making sure they stay up to date, and ensuring there are enough of them running.
+You can also easily autoscale your applications using a Kubernetes deployment.
+
+# Pod
+A pod is the smallest execution unit in Kubernetes. 
+Pods are ephemeral by nature; if a pod (or the node it executes on) fails, Kubernetes can automatically create a new replica of that pod to continue operations. 
+Pods include one or more containers (such as Docker containers).
+
+# Secret
+Next, we are going to create a secret. A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. 
+Secrets are similar to ConfigMaps but are specifically intended to hold confidential data.
+Kubernetes accepts secrets as base64 encoded values, encoding and encryption both are different. 
+
+# Service
+We could use a deployment without a service to keep a set of identical pods running in the Kubernetes cluster. 
+The deployment could be scaled up and down and pods could be replicated. 
+Each pod could be accessed individually via direct network requests (rather than abstracting them behind a service), but keeping track of this for a lot of pods is difficult and this is where we introduce service.
+A service is responsible for enabling network access to a set of pods. 
+It does not matter how many pods come and go, the service is going to maintain a single IP address.
+
+There are many service type like:
+
+    ClusterIP: Exposes a service which is only accessible from within the cluster. Example: A service that exposes the Kubernetes API server to be used by other pods within the cluster.
+    NodePort: Exposes a service via a static port on each node’s IP. Example: A service that exposes the Kubernetes API server to external clients.
+    LoadBalancer: Exposes the service via the cloud provider’s load balancer. Example: A service that exposes an application to external clients using a cloud provider’s load balancer.
+    ExternalName: Maps a service to a predefined externalName field by returning a value for the CNAME record. Example: A service that exposes an external service using a CNAME record. No proxying of any kind is set up.
+
+
+# ConfigMap
+According to Kubernetes documentation: A ConfigMap is an API object used to store non-confidential data in key-value pairs. 
+Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.
+
+Job
+A Kubernetes job is a supervisor for pods carrying out batch processes, 
+that is, a process that runs for a certain time to completion, for example a calculation or a backup operation.

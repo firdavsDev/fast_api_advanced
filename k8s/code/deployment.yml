@@ -6,7 +6,7 @@ metadata:
   labels:
     app: ecommerce
 spec:
-  replicas: 8
+  replicas: 3
   selector:
     matchLabels:
       app: ecommerce-app
@@ -25,7 +25,7 @@ spec:
               "until pg_isready -h postgres-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local -p 5432; do echo waiting for database; sleep 2; done;",
             ]
       containers:
-        - image: 20020726/ecommerce-fastapi:latest
+        - image: 20020726/ecommerce-fastapi:1.0
           imagePullPolicy: Always
           name: sample-container
           envFrom:

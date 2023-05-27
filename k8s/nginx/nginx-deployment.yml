@@ -6,7 +6,7 @@ metadata:
   labels:
     app: ecommerce
 spec:
-  replicas: 8
+  replicas: 3
   selector:
     matchLabels:
       app: ecommerce-nginx
@@ -38,4 +38,4 @@ spec:
       volumes:
         - name: nginx-config
           configMap:
-            name: nginx-config
+            name: nginx-config # ConfigMap name here (nginx-config.yml)

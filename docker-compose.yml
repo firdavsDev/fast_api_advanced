@@ -8,6 +8,8 @@ services:
     volumes:
       - local_postgres_data:/var/lib/postgresql/data:cached
       - local_postgres_data_backups:/backups:cached
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
 
   pgadmin:
     image: dpage/pgadmin4
@@ -30,7 +32,3 @@ volumes:
   local_postgres_data: {}
   local_postgres_data_backups: {}
   pgadmin-data: {}
-
-#docker exec -it fast_api_advanced_db_1 /bin/sh
-#psql -U postgres
-#CREATE DATABASE db_names;
