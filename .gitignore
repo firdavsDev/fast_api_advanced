@@ -2,7 +2,4 @@ venv/
 .env
 .venv/
 __pycache__/
-eks
-k8s
-docs
 .pytest_cache
