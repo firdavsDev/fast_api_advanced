@@ -16,7 +16,7 @@ app = FastAPI(
     title="FastAPI Advanced Tutorial",
     description="This is a very fancy project, with auto docs for the API and everything. More: https://www.jetbrains.com/pycharm/guide/tutorials/fastapi-aws-kubernetes",
     version="0.0.1",
-    docs_url="/",
+    docs_url="/docs",
     redoc_url="/redoc"
 )
 

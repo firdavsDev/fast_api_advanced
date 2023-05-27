@@ -2,5 +2,8 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
     },
-    "python.formatting.provider": "none"
+    "python.formatting.provider": "none",
+    "yaml.schemas": {
+        "kubernetes://schema/v1@service": "k8smsx://loadkubernetescore/service-kubernetes.yaml?ns%3Ddefault%26value%3Dservice%2Fkubernetes%26_%3D1685197263220"
+    }
 }
