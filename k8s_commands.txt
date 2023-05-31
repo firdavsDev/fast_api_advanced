@@ -1,0 +1,52 @@
+## Build image for push to docker hub
+    docker build -t 20020726/ecommerce-fastapi:1.0  .
+
+## Push image to docker hub
+    docker push 20020726/ecommerce-fastapi:1.0
+
+## Run image
+    docker run -d -p 8000:8000 20020726/ecommerce-fastapi:1.0
+
+## List of minikupe
+    minikube service list
+
+## Delete service
+    kubectl delete service ecommerce-fastapi-service
+
+## Delete deployment
+    kubectl delete deployment ecommerce-fastapi-deployment
+
+## Delete pod
+    kubectl delete pod ecommerce-fastapi-pod
+
+## Delete minikube
+    minikube delete
+
+## minikube dashboard
+    minikube dashboard
+
+## minikube ip
+    minikube ip
+
+## get runing pods
+    kubectl get pods -n fastapi-project
+    
+## get runing services
+    kubectl get services -n fastapi-project
+
+## Apply k8s yml files to k8s cluster
+    kubectl apply -f postgres/
+
+minikube start --mount-string "$HOME/postgres-data:/data" --driver=docker --install-addons=true --kubernetes-version=stable
+## By this command we can mount our local directory to minikube cluster and we can use this directory as a volume in our k8s cluster
+## --mount-string "$HOME/postgres-data:/data" this command will mount our local directory to minikube cluster
+## --driver=docker this command will use docker as a driver for minikube
+## --install-addons=true this command will install all the addons for minikube
+## --kubernetes-version=stable this command will install the stable version of kubernetes
+## --cpus=4 --memory=8192 this command will allocate 4 cpus and 8GB memory to minikube
+## --extra-config=kubelet.authentication-token-webhook=true this command will enable authentication token webhook
+
+
+## HELM Chart
+    More info: https://helm.sh/docs/intro/quickstart/
+    https://www.jetbrains.com/pycharm/guide/tutorials/fastapi-aws-kubernetes/helm_charts/
