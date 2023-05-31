@@ -50,13 +50,4 @@ app.kubernetes.io/name: {{ include "fastapi-helm.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "fastapi-helm.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "fastapi-helm.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
+
